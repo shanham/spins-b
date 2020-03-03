@@ -16,7 +16,6 @@ Installation and running:
 6. python3 view test1
 ISSUE: Getting really bad performance using virtual environment. Stopped using it.
 
-
 """
 
 import os
