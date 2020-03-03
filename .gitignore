@@ -40,4 +40,5 @@ _build/**
 .DS_Store
 
 venv/
-/examples/THz Filter/test*/
+examples/THz Filter/test*/
+
