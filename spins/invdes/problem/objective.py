@@ -673,6 +673,29 @@ class AbsoluteValue(OptimizationFunction):
         return "abs({})".format(self._inputs[0])
 
 
+class Log10(OptimizationFunction):
+    """Objective takes the Log10 value of the input."""
+
+    def __init__(self, objective):
+        """Initializes log10 value function.
+
+        Args:
+            obj: The objective to wrap.
+        """
+        super().__init__(objective)
+
+    def eval(self, input_vals: List[np.ndarray]) -> np.ndarray:
+        return np.log10(input_vals[0])
+
+    def grad(self, input_vals: List[np.ndarray],
+             grad_val: np.ndarray) -> List[np.ndarray]:
+        grad = 1 / (input_vals[0] * np.log(10))
+        return [grad_val * grad]
+
+    def __str__(self):
+        return "log10({})".format(self._inputs[0])
+
+
 class IndicatorPlus(OptimizationFunction):
     """Objective that penalizes the input being larger than some value, alpha.
 

@@ -38,3 +38,5 @@ _build/**
 .coverage*
 
 .DS_Store
+
+venv/

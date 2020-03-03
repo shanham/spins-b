@@ -109,6 +109,30 @@ def abs(fun: optplan.Function) -> optplan.Function:
 
 
 @optplan.register_node_type()
+class Log10(optplan.Function):
+    """Defines Log base 10 value of a function.
+
+    Attributes:
+        type: Must be "log".
+        function: The function to take absolute value of.
+    """
+    type = schema_utils.polymorphic_model_type("function.log10")
+    function = optplan.ReferenceType(optplan.Function)
+
+
+def log10(fun: optplan.Function) -> optplan.Function:
+    """Utility function for creating log10 fn
+
+    Args:
+        fun: Function to take log value value.
+
+    Returns:
+        `Log10` of `fun`.
+    """
+    return Log10(function=fun)
+
+
+@optplan.register_node_type()
 class Constant(optplan.Function):
     """Defines a constant scalar.
 

@@ -25,6 +25,12 @@ def create_abs(params: optplan.Abs,
     return problem.AbsoluteValue(objective=work.get_object(params.function))
 
 
+@optplan.register_node(optplan.Log10)
+def create_log10(params: optplan.Log10,
+                 work: workspace.Workspace) -> problem.Log10:
+    return problem.Log10(objective=work.get_object(params.function))
+
+
 @optplan.register_node(optplan.Power)
 def create_power(params: optplan.Power,
                  work: workspace.Workspace) -> problem.Power:

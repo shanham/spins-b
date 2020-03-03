@@ -295,4 +295,29 @@ def plot_monitor_data(log_df: pd.DataFrame,
     if show:
         plt.show()
     else:
-        plt.close()
+        pass  # Changed by Stephen
+        #plt.close()
+
+
+def plot_power_vs_wlen(log_df: pd.DataFrame,
+                       monitor_descriptions: monitor_spec.MonitorDescriptionList,
+                       port_name,
+                       show: bool = True) -> None:
+
+    wlen_list = []
+    power_list = []
+    for monitor_description in monitor_descriptions.monitor_list:
+        #monitor_description = monitor_description_list.monitor_list[plt_ind]
+        name = monitor_description.monitor_names[0]
+        if name.startswith(port_name):
+            wlen_list.append(float(name.split('_')[-1]))  # Here we assume the wavelength is at th end of the monitor name
+            power_list.append(loader.get_single_monitor_data(log_df, name))
+
+    plt.figure()
+    plt.plot(wlen_list, 10*np.log10(power_list), '-x')
+    plt.xlabel('Wavelength (nm)')
+    plt.ylabel('dB')
+    plt.title(port_name + ' Power')
+
+    if show:
+        plt.show()
