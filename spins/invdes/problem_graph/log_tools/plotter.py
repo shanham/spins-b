@@ -165,7 +165,12 @@ def plot_field_data(
                 field_dat,
                 vector_operation=monitor_description.vector_operation,
                 scalar_operation=monitor_description.scalar_operation)
-            field = np.squeeze(np.array(field.T))
+
+            if len(field.shape) == 3:  # Added by S. Hanham to handle 3D fields
+                nx, ny, nz = field.shape
+                field = np.squeeze(np.array(field[:, :, int(0.5*nz)].T))
+            else:
+                field = np.squeeze(np.array(field.T))
 
             # Make sure field is plottable as an image.
             if len(field.shape) != 2:
